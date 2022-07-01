@@ -1,42 +1,47 @@
-000100* FIND THE SUM OF ALL MULTIPLES OF 3 OR 5 BELOW 1000
-000200 IDENTIFICATION DIVISION.
-000300 PROGRAM-ID. EULER1.
-000400* 
-000500 DATA DIVISION.
-000600     WORKING-STORAGE SECTION.
-000700     01 WS-VALUE-INDEX INDEX.
-000800     01 WS-X PIC 9(10) VALUE 0.
-000900*     
-001000     01 WS-START PIC 9(2).
-001100     01 WS-CURRENT PIC 9(4).
-001200     01 WS-TABLE.
-001300     05 WS-VALUE PIC 9(4) VALUE 0 OCCURS 1000 TIMES INDEXED BY I.
-001400* 
-001500 PROCEDURE DIVISION.
-001600     PERFORM A-PARA
-001700         VARYING WS-START FROM 3 BY 2 UNTIL WS-START>5.
-001800     PERFORM C-PARA VARYING WS-VALUE-INDEX FROM 1 BY 1 
-001900         UNTIL WS-VALUE-INDEX >= 1000.
-002000     DISPLAY "SOLUTION: "WS-X.
-002100     STOP RUN.
-002200*
-002300     A-PARA.
-002400     MOVE WS-START TO WS-CURRENT.
-002500     PERFORM B-PARA UNTIL WS-CURRENT >= 1000.
-002600*    
-002700     B-PARA.
-002800     SET I TO 1.
-002900     SEARCH WS-VALUE
-003000*        APPEND WS-CURRENT TO TABLE IF NOT FOUND IN TABLE
-003100         AT END 
-003200             MOVE WS-CURRENT TO WS-VALUE(WS-VALUE-INDEX)
-003300*        OTHERWISE JUST CONTINUE
-003400         WHEN WS-VALUE(I) = WS-CURRENT
-003500             CONTINUE
-003600     END-SEARCH.
-003700     SET WS-VALUE-INDEX UP BY 1.
-003800     ADD WS-START TO WS-CURRENT.
-003900*
-004000     C-PARA.
-004100     COMPUTE WS-X = WS-X + WS-VALUE(WS-VALUE-INDEX).
-004200*
+000100 identification division.
+000200 program-id. euler1.
+000300 environment division.
+000400 configuration section.
+000500 repository.
+000600     function sumDivisibleBy.
+000700 data division.
+000800 working-storage section.
+000900     01 ws-maximum   pic 9(4)    value 1000.
+001000     01 ws-multiple  pic 9(2)    value 3.
+001100     01 ws-result    pic 9(6)    value 0.
+001200 procedure division.
+001300 perform 100-run thru 100-exit.
+001400 goback.
+001500 100-run.
+001600     compute ws-result = sumDivisibleBy(03, 1000)
+001700         +sumDivisibleBy(05, 1000)
+001800         -sumDivisibleBy(15, 1000).
+001900     display ws-result space ws-multiple.
+002000 100-exit. exit.
+002100 end program euler1.
+002200*-----------------------------------------------------------------
+002300 identification division.
+002400 function-id. sumDivisibleBy.
+002500 data division.
+002600 working-storage section.
+002700     01 ws-current   pic 9(4).
+002800 linkage section.
+002900     01 ls-multiple  pic 9(2).
+003000     01 ls-maximum   pic 9(4).
+003100     01 ls-result    pic 9(6).
+003200 procedure division
+003300 using ls-multiple ls-maximum
+003400 returning ls-result.
+003500 perform 100-init thru 100-exit.
+003600 goback.
+003700 100-init.
+003800     move 0 to ls-result.
+003900 100-run.
+004000     perform
+004100     varying ws-current from 0 by ls-multiple
+004200     until ws-current >= ls-maximum
+004300         add ws-current to ls-result
+004400     end-perform.
+004500 100-exit. exit.
+004600 end function sumDivisibleBy.
+004700 
