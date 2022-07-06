@@ -17,7 +17,7 @@
 001700         perform 200-calc-power
 001800         add ws-power to ws-result
 001900     end-perform.
-002000     display ws-result.
+002000     display "Result: " ws-result.
 002100 100-exit. exit.
 002200 200-calc-power.
 002300     move 1 to ws-power.

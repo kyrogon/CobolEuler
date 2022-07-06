@@ -16,7 +16,7 @@
 001600     compute ws-result = sumDivisibleBy(03, 1000)
 001700         +sumDivisibleBy(05, 1000)
 001800         -sumDivisibleBy(15, 1000).
-001900     display ws-result space ws-multiple.
+001900     display "Result: " ws-result.
 002000 100-exit. exit.
 002100 end program euler1.
 002200*-----------------------------------------------------------------
