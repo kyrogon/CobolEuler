@@ -33,4 +33,4 @@
 003300 200-prime-found.
 003400     divide ws-prime-can into ws-testor.
 003500     move 2 to ws-prime-can.
-003600 end program euler2.
+003600 end program euler3.
