@@ -46,4 +46,3 @@
 004600     end-perform.
 004700 100-exit. exit.
 004800 end function sumDivisibleBy.
-004900 
