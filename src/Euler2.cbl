@@ -1,5 +1,5 @@
 000100 identification division.
-000200 program-id. euler3.
+000200 program-id. euler2.
 000300 data division.
 000400 working-storage section.
 000500     01 ws-fibs.
@@ -25,4 +25,4 @@
 002500     if function mod(ws-fib(3), 2) = 0
 002600         add ws-fib(3) to ws-result
 002700     end-if.
-002800 end program euler3.
+002800 end program euler2.
